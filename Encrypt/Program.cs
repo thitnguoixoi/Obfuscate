@@ -40,7 +40,7 @@ class Program
         string outputIconFile = "output.png";
         EmbedDataInIcon(inputFile, outputIconFile, keyBase64, nonceBase64, tagBase64);
 
-        Console.WriteLine("Mã hóa và dấu dữ liệu thành công!");
+        Console.WriteLine("Encryption done!");
     }
 
     static byte[] GenerateRandomBytes(int length)
@@ -59,12 +59,11 @@ class Program
 
         // Ghép các chuỗi Base64 thành một chuỗi duy nhất
         string message = $"{keyBase64}|{nonceBase64}|{tagBase64}\0";
-        File.WriteAllText("message.txt", message);
         // Kiểm tra kích thước dữ liệu cần dấu có vượt quá giới hạn của icon hay không
         int maxDataLength = icon.Width * icon.Height * 3 / 8; // Giới hạn dữ liệu dấu là 3/8 kích thước icon
         if (message.Length > maxDataLength)
         {
-            throw new Exception("Dữ liệu cần dấu vượt quá giới hạn kích thước của icon.");
+            throw new Exception("Message lagger than icon!!");
         }
 
         // Chuyển icon thành bitmap để thực hiện các thao tác pixel

